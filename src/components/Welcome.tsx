@@ -1,5 +1,6 @@
 import React from "react";
 import { useUser } from "../deth/hooks";
+import { Profile } from "./Profile";
 
 export const Welcome: React.FC = () => {
   const { token, user, logout } = useUser();
@@ -15,6 +16,7 @@ export const Welcome: React.FC = () => {
         copy token
       </button>
       <button onClick={logout}>logout</button>
+      <Profile />
     </div>
   );
 };
