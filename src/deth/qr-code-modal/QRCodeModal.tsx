@@ -1,21 +1,28 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Modal from "react-modal";
 import QRCode from "react-qr-code";
 
-import icon from "./SignInModal.logo.png";
+import icon from "./icon.png";
 
 type Props = {
   uri?: string;
-  show: boolean;
+  open: boolean;
+  isSignedIn?: boolean;
   onClose: () => void;
 };
 
-export const SignInModal: React.FC<Props> = (props) => {
-  const { show, onClose, uri = "" } = props;
+export const QRCodeModal: React.FC<Props> = (props) => {
+  const { open, onClose, isSignedIn, uri = "" } = props;
+
+  useEffect(() => {
+    if (isSignedIn) {
+      onClose();
+    }
+  }, [isSignedIn, onClose]);
 
   return (
     <Modal
-      isOpen={show}
+      isOpen={open}
       onRequestClose={onClose}
       style={{
         overlay: {
@@ -46,12 +53,14 @@ export const SignInModal: React.FC<Props> = (props) => {
           padding: 12,
         }}
       >
-        <img
-          style={{ margin: 12, marginBottom: 32 }}
-          width={50}
-          src={icon}
-          alt="Logo"
-        />
+        <div style={{ width: 74, height: 94 }}>
+          <img
+            style={{ margin: 12, marginBottom: 32 }}
+            width={50}
+            src={icon}
+            alt="deth"
+          />
+        </div>
         <a href={uri}>
           <QRCode size={256} value={uri} />
         </a>
