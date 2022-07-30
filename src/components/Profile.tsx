@@ -1,47 +1,40 @@
+import _ from "lodash";
 import React, { useEffect, useState } from "react";
 import { useUser } from "../deth/hooks";
 import { Gallery } from "./Gallery";
-import { getNFTs } from "./Profile.utils";
+import { useNFTs } from "./Profile.utils";
+
+import "./Profile.css";
+import { Button } from "./Button";
+import { MoonLoader } from "react-spinners";
 
 export const Profile: React.FC = () => {
-  const { token } = useUser();
-
-  const [loading, setLoading] = useState(false);
-
-  const [domains, setDomains] = useState<string[]>([]);
-  const [nfts, setNFTs] = useState<{ title: string; image: string }[]>([]);
-
-  useEffect(() => {
-    setLoading(true);
-    getNFTs(token ?? "")
-      .then(({ ens, nfts }) => {
-        setDomains(ens);
-        setNFTs(nfts);
-      })
-      .catch((exc) => {
-        console.error(exc);
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, [token]);
+  const { token, user, logout } = useUser();
+  const { loading, domains, nfts } = useNFTs(token);
+  const name =
+    _.first(domains) ?? `0x${user?.slice(11, 15)}..${user?.slice(-4)}`;
 
   if (loading) {
-    return <div>Loading profile...</div>;
+    return (
+      <div className="loader">
+        <MoonLoader size={24} />
+      </div>
+    );
   }
 
   return (
     <div>
-      {domains.length > 0 && (
-        <div style={{ margin: 24 }}>
-          <div style={{ fontSize: 18, fontWeight: "bold" }}>
-            Your ENS names:
-          </div>
-          {domains.map((domain) => (
-            <div style={{ fontSize: 18 }}>{domain}</div>
-          ))}
-        </div>
-      )}
+      <div className="welcome">Welcome, {name}!</div>
+      <div className="buttons">
+        <Button
+          onClick={() => {
+            navigator.clipboard.writeText(token ?? "");
+          }}
+        >
+          Copy token
+        </Button>
+        <Button onClick={logout}>Sign out</Button>
+      </div>
       <Gallery nfts={nfts} />
     </div>
   );

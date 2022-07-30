@@ -1,0 +1,19 @@
+.welcome {
+  font-weight: bold;
+  font-size: 28px;
+  margin-top: 42px;
+  margin-bottom: 28px;
+}
+
+.loader {
+  margin: 64px;
+  display: flex;
+  justify-content: center;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 32px;
+  flex-wrap: wrap;
+}

@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useEffect, useState } from "react";
 
 const GET_NFT_ENDPOINT =
   "https://deth-nft-explorer-api-5npty.ondigitalocean.app/nfts";
@@ -18,8 +19,6 @@ export const getNFTs = async (token: string): Promise<Response> => {
     },
   });
 
-  console.log("jaaaaa");
-
   const ens = resp.data.nfts.ownedNfts
     .filter((nft: any) => nft.title.endsWith(".eth"))
     .map((nft: any) => nft.title);
@@ -31,7 +30,29 @@ export const getNFTs = async (token: string): Promise<Response> => {
       image: nft.media[0].gateway,
     }));
 
-  console.log({ ens, nfts });
-
   return { ens, nfts };
+};
+
+export const useNFTs = (token?: string | null) => {
+  const [loading, setLoading] = useState(false);
+
+  const [domains, setDomains] = useState<string[]>([]);
+  const [nfts, setNFTs] = useState<{ title: string; image: string }[]>([]);
+
+  useEffect(() => {
+    setLoading(true);
+    getNFTs(token ?? "")
+      .then(({ ens, nfts }) => {
+        setDomains(ens);
+        setNFTs(nfts);
+      })
+      .catch((exc) => {
+        console.error(exc);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [token]);
+
+  return { loading, domains, nfts };
 };

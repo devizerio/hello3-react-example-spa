@@ -1,5 +1,7 @@
 import React from "react";
 
+import "./Gallery.css";
+
 type Props = {
   nfts: { title: string; image: string }[];
 };
@@ -7,39 +9,16 @@ type Props = {
 export const Gallery: React.FC<Props> = (props) => {
   const { nfts } = props;
   return (
-    <div
-      style={{
-        width: 1000,
-        maxWidth: "100%",
-        display: "flex",
-        flexDirection: "row",
-        flexWrap: "wrap",
-        justifyContent: "center",
-      }}
-    >
+    <div className="gallery">
       {nfts.map((nft, idx) => (
-        <div
-          key={idx}
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            margin: 6,
-          }}
-        >
-          <img
-            style={{
-              width: 250,
-              height: 250,
-              borderRadius: 16,
-              border: "2px solid black",
-            }}
-            src={nft.image}
-            alt={nft.title}
-          />
-          <div style={{ textAlign: "center", fontSize: 12 }}>{nft.title}</div>
+        <div key={idx} className="nft">
+          <img className="nft-image" src={nft.image} alt={nft.title} />
+          <div className="nft-name">{nft.title}</div>
         </div>
       ))}
+      {nfts.length < 1 && (
+        <div className="empty-state">No NFTs found on this account.</div>
+      )}
     </div>
   );
 };
