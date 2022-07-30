@@ -6,6 +6,8 @@ import { Profile } from "./components/Profile";
 import "./App.css";
 import { Button } from "./components/Button";
 
+import logo from "./logo.png";
+
 function App() {
   const [showLogin, setShowLogin] = useState(false);
   const { uri, token, user, logout } = useDethAuth();
@@ -24,6 +26,8 @@ function App() {
     <UserContext.Provider value={{ user, token, logout }}>
       <div className="app">
         <div className="login">
+          <img className="logo" src={logo} alt="NFT Viewer App" />
+          <h2 className="title">DETH NFT Viewer</h2>
           <Button onClick={() => setShowLogin(true)}>Sign in</Button>
         </div>
         <QRCodeModal
