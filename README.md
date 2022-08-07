@@ -1,4 +1,4 @@
-# verifiable-identity-example-spa
+# verifiable-identity-nft-spa
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

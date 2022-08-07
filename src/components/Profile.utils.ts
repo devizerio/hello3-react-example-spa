@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const GET_NFT_ENDPOINT = "https://api.example.verifiableidentity.xyz/nfts";
+const GET_NFT_ENDPOINT = "https://nft-api.verifiableidentity.xyz/nfts";
 
 type Response = {
   ens: string[];
@@ -17,6 +17,7 @@ export const getNFTs = async (token: string): Promise<Response> => {
       authorization: `Bearer ${token}`,
     },
   });
+  console.log(resp.data);
   return resp.data.assets;
 };
 
