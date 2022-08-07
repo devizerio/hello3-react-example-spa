@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useDethAuth, UserContext } from "./deth/hooks";
-import { QRCodeModal } from "./deth/qr-code-modal";
+import { useIdentity, UserContext } from "./verifiable-identity/hooks";
+import { QRCodeModal } from "./verifiable-identity/qr-code-modal";
 import { Profile } from "./components/Profile";
 
 import "./App.css";
@@ -10,7 +10,7 @@ import logo from "./logo.png";
 
 function App() {
   const [showLogin, setShowLogin] = useState(false);
-  const { uri, token, user, logout } = useDethAuth();
+  const { uri, token, user, logout } = useIdentity();
 
   if (user) {
     return (
@@ -27,7 +27,7 @@ function App() {
       <div className="app">
         <div className="login">
           <img className="logo" src={logo} alt="NFT Viewer App" />
-          <h2 className="title">DETH NFT Viewer</h2>
+          <h2 className="title">Verifiable Identity NFT Viewer</h2>
           <Button onClick={() => setShowLogin(true)}>Sign in</Button>
         </div>
         <QRCodeModal

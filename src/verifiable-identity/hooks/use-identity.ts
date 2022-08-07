@@ -1,11 +1,11 @@
 import { useCallback, useEffect, useState } from "react";
-import { createAuthDeepLink, createSession } from "../auth";
+import { getDeepLink, createSession } from "../auth";
 import { verifyToken } from "../verify-token";
 import { DEFAULT_STORAGE_KEY } from "./constants";
-import { DethInitConfig } from "./types";
+import { Config } from "./types";
 import { useLocalStorage } from "./use-local-storage";
 
-export const useDethAuth = (config?: DethInitConfig) => {
+export const useIdentity = (config?: Config) => {
   const [user, setUser] = useState<string | null>(null);
 
   const storageKey = config?.storageKey ?? DEFAULT_STORAGE_KEY;
@@ -29,7 +29,7 @@ export const useDethAuth = (config?: DethInitConfig) => {
     } else {
       const socket = createSession(config);
       socket.on("connect", () => {
-        setUri(createAuthDeepLink(socket));
+        setUri(getDeepLink(socket));
       });
       socket.on("token", (token) => setToken(token));
       socket.on("disconnect", () => setUri(null));

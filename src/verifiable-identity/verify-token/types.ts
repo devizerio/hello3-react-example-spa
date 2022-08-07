@@ -3,10 +3,10 @@ import { JwtCredentialPayload, JwtPresentationPayload } from "did-jwt-vc";
 export type DID = string;
 export type Timestamp = number;
 
-export type DethCredential = string;
-export type DethToken = string;
+export type VerifiableIdentityCredential = string;
+export type VerifiableIdentityToken = string;
 
-export type DethCredentialPayload = JwtCredentialPayload & {
+export type VerifiableIdentityCredentialPayload = JwtCredentialPayload & {
   iss: DID;
   sub: DID;
   nbf?: Timestamp;
@@ -18,7 +18,7 @@ export type DethCredentialPayload = JwtCredentialPayload & {
       "https://www.w3.org/2018/credentials/v1",
       "https://www.w3.org/2018/credentials/examples/v1"
     ];
-    type: ["VerifiableCredential", "DethCredential"];
+    type: ["VerifiableCredential", "VerifiableIdentity"];
     nbf?: Timestamp;
     exp: Timestamp;
     iat: Timestamp;
@@ -29,7 +29,7 @@ export type DethCredentialPayload = JwtCredentialPayload & {
   };
 };
 
-export type DethTokenPayload = JwtPresentationPayload & {
+export type VerifiableIdentityTokenPayload = JwtPresentationPayload & {
   iss: DID;
   sub: DID;
   nbf?: Timestamp;
@@ -39,17 +39,17 @@ export type DethTokenPayload = JwtPresentationPayload & {
   session?: string;
   vp: {
     "@context": ["https://www.w3.org/2018/credentials/v1"];
-    type: ["VerifiablePresentation", "DethToken"];
-    verifiableCredential: [DethCredential];
+    type: ["VerifiablePresentation", "VerifiableIdentity"];
+    verifiableCredential: [VerifiableIdentityCredential];
   };
 };
 
-export type DethTokenData = {
+export type VerifiableIdentityTokenData = {
   issuer: string;
   holder: string;
 };
 
-export type DethVerifyErrorCode =
+export type VerifyErrorCode =
   | "HolderMismatch"
   | "IssuerMismatch"
   | "TokenExpired"

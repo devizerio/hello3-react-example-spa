@@ -58,7 +58,7 @@ export const QRCodeModal: React.FC<Props> = (props) => {
             style={{ margin: 12, marginBottom: 32 }}
             width={50}
             src={icon}
-            alt="deth"
+            alt="Verifiable Identity"
           />
         </div>
         <a href={uri}>
@@ -74,8 +74,8 @@ export const QRCodeModal: React.FC<Props> = (props) => {
             width: 256,
           }}
         >
-          Scan this QR code with your deth app or tap it to sign in with the app
-          on this device.
+          Scan this QR code with your Identity provider app or tap it to sign in
+          with the app on this device.
         </div>
       </div>
     </Modal>

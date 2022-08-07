@@ -1,5 +1,5 @@
 import { createContext, useContext } from "react";
-export { useDethAuth } from "./use-deth-auth";
+export { useIdentity } from "./use-identity";
 
 export type UserContextType = {
   token?: string | null;

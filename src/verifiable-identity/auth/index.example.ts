@@ -1,11 +1,11 @@
-import { createAuthDeepLink } from "./create-auth-deep-link";
+import { getDeepLink } from "./get-deep-link";
 import { createSession } from "./create-session";
 
 export const main = async () => {
   const session = createSession();
 
   session.on("connect", () => {
-    const uri = createAuthDeepLink(session);
+    const uri = getDeepLink(session);
     console.log(uri);
   });
 

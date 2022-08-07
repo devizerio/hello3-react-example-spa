@@ -1,33 +1,31 @@
 import { verifyPresentation } from "did-jwt-vc";
 import { Resolver } from "did-resolver";
 import { getDefaultResolver } from "./default-resolver";
-import { DethVerifyError } from "./deth-verify-error";
-import { DethToken, DethTokenData } from "./types";
+import { VerifyError } from "./verify-error";
+import { VerifiableIdentityToken, VerifiableIdentityTokenData } from "./types";
 
 export const verifyToken = async (
-  token: DethToken,
+  token: VerifiableIdentityToken,
   customResolver?: Resolver
-): Promise<DethTokenData> => {
+): Promise<VerifiableIdentityTokenData> => {
   const resolver = customResolver ?? getDefaultResolver();
   const tokenVerification = await verifyPresentation(token, resolver);
 
   const vp = tokenVerification.verifiablePresentation;
 
   if (!vp.verifiableCredential || vp.verifiableCredential.length === 0) {
-    throw new DethVerifyError("CredentialMissing");
+    throw new VerifyError("CredentialMissing");
   }
 
   if (vp.verifiableCredential.length > 1) {
-    throw new DethVerifyError("MoreThanOneCredential");
+    throw new VerifyError("MoreThanOneCredential");
   }
 
   const cred = vp.verifiableCredential[0];
 
   if (cred.credentialSubject.holder !== vp.sub) {
-    throw new DethVerifyError("HolderMismatch");
+    throw new VerifyError("HolderMismatch");
   }
-
-  console.log(cred);
 
   return {
     // @ts-ignore

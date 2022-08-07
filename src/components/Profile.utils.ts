@@ -1,8 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-const GET_NFT_ENDPOINT =
-  "https://deth-nft-explorer-api-5npty.ondigitalocean.app/nfts";
+const GET_NFT_ENDPOINT = "https://api.example.verifiableidentity.xyz/nfts";
 
 type Response = {
   ens: string[];
