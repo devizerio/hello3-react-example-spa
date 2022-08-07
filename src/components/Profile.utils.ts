@@ -17,19 +17,7 @@ export const getNFTs = async (token: string): Promise<Response> => {
       authorization: `Bearer ${token}`,
     },
   });
-
-  const ens = resp.data.nfts.ownedNfts
-    .filter((nft: any) => nft.title.endsWith(".eth"))
-    .map((nft: any) => nft.title);
-
-  const nfts = resp.data.nfts.ownedNfts
-    .filter((nft: any) => !nft.title.endsWith(".eth"))
-    .map((nft: any) => ({
-      title: nft.title,
-      image: nft.media[0].gateway,
-    }));
-
-  return { ens, nfts };
+  return resp.data.assets;
 };
 
 export const useNFTs = (token?: string | null) => {

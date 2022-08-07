@@ -1,5 +1,5 @@
 import _ from "lodash";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useUser } from "../verifiable-identity/hooks";
 import { Gallery } from "./Gallery";
 import { useNFTs } from "./Profile.utils";
