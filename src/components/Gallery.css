@@ -6,6 +6,7 @@
   flex-wrap: wrap;
   justify-content: center;
   margin: 0 auto;
+  margin-bottom: 32px;
 }
 
 .nft {
@@ -16,9 +17,9 @@
 }
 
 .nft-image {
-  width: 250px;
-  height: 250px;
-  border-radius: 16px;
+  width: 125px;
+  height: 125px;
+  border-radius: 8px;
   border: 2px solid black;
   box-sizing: border-box;
 }
