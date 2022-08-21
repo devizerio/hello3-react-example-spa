@@ -17,7 +17,7 @@ function App() {
       <UserContext.Provider value={{ user, token, logout }}>
         <div className="app">
           <img className="logo" src={logo} alt="NFT Viewer App" />
-          <h2 className="title">Verifiable Identity</h2>
+          <h2 className="title">Hello3</h2>
           <Profile />
         </div>
       </UserContext.Provider>
@@ -29,7 +29,7 @@ function App() {
       <div className="app">
         <div className="login">
           <img className="logo" src={logo} alt="NFT Viewer App" />
-          <h2 className="title">Verifiable Identity</h2>
+          <h2 className="title">Hello3</h2>
           <h3 className="subtitle">NFT Viewer</h3>
           <p className="description">
             This is an example application to demo the functionalities of

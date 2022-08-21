@@ -58,7 +58,7 @@ export const QRCodeModal: React.FC<Props> = (props) => {
             style={{ margin: 12, marginBottom: 32 }}
             width={50}
             src={icon}
-            alt="Verifiable Identity"
+            alt="Hello3"
           />
         </div>
         <a href={uri}>
@@ -66,16 +66,16 @@ export const QRCodeModal: React.FC<Props> = (props) => {
         </a>
         <div
           style={{
-            fontStyle: "italic",
             textAlign: "center",
             marginBottom: 24,
             marginTop: 32,
             fontSize: 12,
+            lineHeight: 1.5,
             width: 256,
           }}
         >
-          Scan this QR code with your Identity provider app or tap it to sign in
-          with the app on this device.
+          Scan this QR code with the Hello3 app or tap it if you have Hello3
+          installed on this device.
         </div>
       </div>
     </Modal>
