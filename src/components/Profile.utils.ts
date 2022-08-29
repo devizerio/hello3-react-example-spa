@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 const GET_NFT_ENDPOINT = "https://nft-api.verifiableidentity.xyz/nfts";
 
 type Response = {
+  alias?: string;
   ens: string[];
   nfts: {
     title: string;
@@ -18,7 +19,7 @@ export const getNFTs = async (token: string): Promise<Response> => {
     },
   });
   console.log(resp.data);
-  return resp.data.assets;
+  return { ...resp.data.assets, alias: resp.data.alias };
 };
 
 export const useNFTs = (token?: string | null) => {
@@ -26,13 +27,16 @@ export const useNFTs = (token?: string | null) => {
 
   const [domains, setDomains] = useState<string[]>([]);
   const [nfts, setNFTs] = useState<{ title: string; image: string }[]>([]);
+  const [alias, setAlias] = useState<string | undefined>();
 
   useEffect(() => {
     setLoading(true);
     getNFTs(token ?? "")
-      .then(({ ens, nfts }) => {
+      .then(({ ens, nfts, alias }) => {
+        console.log(alias);
         setDomains(ens);
         setNFTs(nfts);
+        setAlias(alias);
       })
       .catch((exc) => {
         console.error(exc);
@@ -42,5 +46,5 @@ export const useNFTs = (token?: string | null) => {
       });
   }, [token]);
 
-  return { loading, domains, nfts };
+  return { loading, domains, alias, nfts };
 };

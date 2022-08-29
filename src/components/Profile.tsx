@@ -10,9 +10,9 @@ import { MoonLoader } from "react-spinners";
 
 export const Profile: React.FC = () => {
   const { token, user, logout } = useUser();
-  const { loading, domains, nfts } = useNFTs(token);
+  const { loading, domains, alias, nfts } = useNFTs(token);
   const name =
-    _.first(domains) ?? `0x${user?.slice(11, 15)}..${user?.slice(-4)}`;
+    alias ?? _.first(domains) ?? `0x${user?.slice(11, 15)}..${user?.slice(-4)}`;
 
   if (loading) {
     return (
