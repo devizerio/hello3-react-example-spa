@@ -1,64 +1,44 @@
-import { useState } from "react";
-import { useIdentity, UserContext } from "./verifiable-identity/hooks";
-import { QRCodeModal } from "./verifiable-identity/qr-code-modal";
-import { Profile } from "./components/Profile";
+import { Profile } from './components/Profile'
+import { useHello3 } from '@hello3/react'
 
-import "./App.css";
-import { Button } from "./components/Button";
+import './App.css'
+import { Button } from './components/Button'
 
-import logo from "./logo.png";
+import logo from './logo.png'
 
 function App() {
-  const [showLogin, setShowLogin] = useState(false);
-  const { uri, token, user, logout } = useIdentity();
+  const { user, showSignInModal } = useHello3()
 
   if (user) {
     return (
-      <UserContext.Provider value={{ user, token, logout }}>
-        <div className="app">
-          <img className="logo" src={logo} alt="NFT Viewer App" />
-          <h2 className="title">Hello3</h2>
-          <Profile />
-        </div>
-      </UserContext.Provider>
-    );
+      <div className="app">
+        <img className="logo" src={logo} alt="NFT Viewer App" />
+        <h2 className="title">Hello3</h2>
+        <Profile />
+      </div>
+    )
   }
 
   return (
-    <UserContext.Provider value={{ user, token, logout }}>
-      <div className="app">
-        <div className="login">
-          <img className="logo" src={logo} alt="NFT Viewer App" />
-          <h2 className="title">Hello3</h2>
-          <h3 className="subtitle">NFT Viewer</h3>
-          <p className="description">
-            This is an example application to demo the functionalities of
-            authentication based on verifiable identities. That means you do{" "}
-            <b>not</b> need your original private key to log in. Read more about
-            this on{" "}
-            <a
-              className="link"
-              target="_blank"
-              rel="noreferrer"
-              href="https://verifiableidentity.xyz"
-            >
-              verifiableidentity.xyz
-            </a>
-            .
-          </p>
-          <div className="signin-button">
-            <Button onClick={() => setShowLogin(true)}>Sign in</Button>
-          </div>
+    <div className="app">
+      <div className="login">
+        <img className="logo" src={logo} alt="NFT Viewer App" />
+        <h2 className="title">Hello3</h2>
+        <h3 className="subtitle">NFT Viewer</h3>
+        <p className="description">
+          This is an example application to demo the authentication flow with the Hello3 app. That means you do <b>not</b> need your original private
+          key to log in. Read more about this on{' '}
+          <a className="link" target="_blank" rel="noreferrer" href="https://docs.hello3.io">
+            docs.hello3.io
+          </a>
+          .
+        </p>
+        <div className="signin-button">
+          <Button onClick={() => showSignInModal()}>Sign in</Button>
         </div>
-        <QRCodeModal
-          uri={uri ?? ""}
-          open={showLogin}
-          isSignedIn={!!token}
-          onClose={() => setShowLogin(false)}
-        />
       </div>
-    </UserContext.Provider>
-  );
+    </div>
+  )
 }
 
-export default App;
+export default App
