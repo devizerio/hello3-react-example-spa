@@ -12,6 +12,9 @@ root.render(
     <Hello3Provider
       config={{
         domain: 'example.hello3.io',
+        connectorSocketEndpoint: 'wss://connector.hello3.io',
+        connectorPostEndpoint: 'https://connector.hello3.io',
+        callbackEndpoint: 'https://example.hello3.io',
       }}
     >
       <App />
