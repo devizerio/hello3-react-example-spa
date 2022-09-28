@@ -12,7 +12,7 @@ export const Profile: React.FC = () => {
   const { user, clearSession } = useHello3()
 
   const { loading, domains, alias, nfts } = useNFTs(user?.token)
-  const name = alias ?? _.first(domains) ?? `0x${user?.address.slice(11, 15)}..${user?.address.slice(-4)}`
+  const name = alias ?? _.first(domains) ?? `${user?.address.slice(0, 6)}...${user?.address.slice(-4)}`
 
   if (loading) {
     return (
